@@ -1,0 +1,45 @@
+{
+  "ingredients": [
+    {
+      "id": 1,
+      "name": "arroz branco",
+      "category": 1,
+      "items": [
+        {
+          "id": "aaa-bbb-123a",
+          "name": "arroz camil",
+          "quantity": 500,
+          "unit": "g",
+          "expiration": "2024-05-30"
+        }
+      ]
+    }
+  ],
+  "alerts": [
+    {
+      "id": 1,
+      "name": "Grãos uma semana antes do vencimento",
+      "linked_categories": [
+        1
+      ],
+      "timespan": {
+        "value": 7,
+        "type": "days",
+        "time": "15"
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "grains"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "xpz-123-abc",
+      "name": "Pão",
+      "saved_on": "2024-02-24"
+    }
+  ]
+}
