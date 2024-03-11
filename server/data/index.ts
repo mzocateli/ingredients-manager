@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { Data } from '../types';
+import { Data } from '../../src/types';
 
 export const readData = (): Data => {
   return JSON.parse(fs.readFileSync('data.json', 'utf8'));

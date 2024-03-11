@@ -2,17 +2,39 @@
   "ingredients": [
     {
       "id": 1,
-      "name": "arroz branco",
+      "name": "Arroz Branco",
       "category": 1,
       "items": [
         {
           "id": "aaa-bbb-123a",
-          "name": "arroz camil",
+          "name": "Arroz Camil",
           "quantity": 500,
           "unit": "g",
-          "expiration": "2024-05-30"
+          "expiration": "2024-05-30",
+          "ingredientId": 1
+        },
+        {
+          "name": "Arroz Tio João",
+          "quantity": 1,
+          "unit": "kg",
+          "expiration": "2024-05-24",
+          "id": "6x7-4vl-hqek"
         }
       ]
+    },
+    {
+      "name": "Banana",
+      "category": "3",
+      "items": [
+        {
+          "name": "Banana Prata",
+          "quantity": 6,
+          "unit": "un",
+          "expiration": "2024-03-14",
+          "id": "t8y-psa-ppw8"
+        }
+      ],
+      "id": 4068
     }
   ],
   "alerts": [

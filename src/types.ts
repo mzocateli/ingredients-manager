@@ -6,7 +6,7 @@ export interface Data {
 }
 
 export interface Alert {
-  id: number;
+  id?: number;
   name: string;
   linked_categories: number[];
   timespan: Timespan;
@@ -19,19 +19,19 @@ export interface Timespan {
 }
 
 export interface Category {
-  id: number;
+  id?: number;
   name: string;
 }
 
 export interface Ingredient {
-  id: number;
+  id?: number;
   name: string;
   category: number;
   items: Item[];
 }
 
 export interface Item {
-  id: string;
+  id?: string;
   name: string;
   quantity: number;
   unit: string;
@@ -39,7 +39,7 @@ export interface Item {
 }
 
 export interface Recipe {
-  id: string;
+  id?: string;
   name: string;
   saved_on: string;
 }
