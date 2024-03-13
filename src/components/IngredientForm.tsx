@@ -113,7 +113,7 @@ const IngredientForm = () => {
             <TextField label="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />
           </Grid>
           {showItemForm && (
-            <>
+            <Grid item xs={12} container component="div">
               <ItemForm item={item} handleItemChange={handleItemChange} />
               <Button variant="contained" color="primary" onClick={handleConfirmItem}>
                 Confirm
@@ -121,7 +121,7 @@ const IngredientForm = () => {
               <Button variant="contained" color="secondary" onClick={handleCancelItem}>
                 Cancel
               </Button>
-            </>
+            </Grid>
           )}
           {!showItemForm && (
             <>
