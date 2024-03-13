@@ -7,6 +7,7 @@ import AppTopBar from '../components/TopBar';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AppBottomNavigation from '../components/AppBottomNavigation';
 
 const IngredientsPage = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
@@ -29,6 +30,11 @@ const IngredientsPage = () => {
     navigate('/ingredients/register');
   };
 
+  const handleUseClick = () => {
+    console.log('Redirecting to /ingredients/use');
+    navigate('/ingredients/use');
+  };
+
   return (
     <div>
       <AppTopBar text="Cadastrar Ingrediente" handleButtonClick={handleButtonClick} />
@@ -49,12 +55,18 @@ const IngredientsPage = () => {
             <Fab color="secondary" aria-label="edit" sx={{ position: 'absolute', bottom: 75, right: 90 }}>
               <EditIcon />
             </Fab>
-            <Fab color="secondary" aria-label="delete" sx={{ position: 'absolute', bottom: 140, right: 20 }}>
+            <Fab
+              color="secondary"
+              aria-label="delete"
+              sx={{ position: 'absolute', bottom: 140, right: 20 }}
+              onClick={handleUseClick}
+            >
               <DeleteIcon />
             </Fab>
           </div>
         )}
       </div>
+      <AppBottomNavigation />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { readData, writeData } from '../data';
 import { validateIngredient } from '../middlewares/validateIngredient';
 import { validateItem } from '../middlewares/validateItem';
+import { Ingredient, Item } from '../../src/types';
 
 const router = express.Router();
 
@@ -96,6 +97,26 @@ router.post('/:id/items', validateItem, (req: Request, res: Response) => {
   ingredient!.items.push(item);
   writeData(data);
   res.json(item);
+});
+
+router.put('/items/use', (req: Request, res: Response) => {
+  const data = readData();
+  const items: Item[] = req.body.items;
+  const updatedItems: Ingredient[] = data.ingredients.map(ingredient => {
+    const updatedIngredientItems = ingredient.items.map(item => {
+      const matchingItem = items.find((i: Item) => i.id === item.id);
+      if (matchingItem) {
+        return { ...item, quantity: item.quantity - matchingItem.quantity };
+      }
+      return item;
+    });
+    return { ...ingredient, items: updatedIngredientItems };
+  });
+  writeData({
+    ...data,
+    ingredients: updatedItems
+  });
+  res.json(updatedItems);
 });
 
 router.put('/:id/items/:itemId', validateItem, (req: Request, res: Response) => {
