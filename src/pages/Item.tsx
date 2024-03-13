@@ -1,14 +1,15 @@
 import React, { FormEvent, useState, useEffect } from 'react';
 import AppTopBar from '../components/TopBar';
 import { useNavigate } from 'react-router-dom';
-import { Item } from '../types';
+import { Ingredient, Item } from '../types';
 import ItemForm from '../components/ItemForm';
-import { Button } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 const ItemsPage = () => {
   const [item, setItem] = useState<Item>({ name: '', quantity: 0, unit: '', expiration: '' });
-  const [ingredientId, setIngredientId] = useState<number>(0);
+  const [ingredientId, setIngredientId] = useState<number | ''>('');
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 
   const navigate = useNavigate();
 
@@ -20,10 +21,17 @@ const ItemsPage = () => {
       setIngredientId(localItem.ingredientId);
       setIsEdit(true);
     }
+
+    if (localStorage.getItem('isBuying') === 'true') {
+      fetch('http://localhost:3001/api/ingredients')
+        .then((response) => response.json())
+        .then((data) => setIngredients(data));
+    }
   }, []);
 
   const returnToIngredients = () => {
     localStorage.removeItem('selected_item');
+    localStorage.removeItem('isBuying');
     navigate(-1);
   };
 
@@ -36,13 +44,17 @@ const ItemsPage = () => {
     setItem({ ...item, [field]: value });
   };
 
+  const handleIngredientChange = (event) => {
+    setIngredientId(event.target.value === '' ? '' : Number(event.target.value));
+  };
+
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     const url = isEdit
       ? `http://localhost:3001/api/ingredients/${ingredientId}/items/${item.id}`
       : `http://localhost:3001/api/ingredients/${ingredientId}/items`;
     const method = isEdit ? 'PUT' : 'POST';
-    const body = JSON.stringify(item);
+    const body = JSON.stringify({ ...item, ingredientId });
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -73,6 +85,18 @@ const ItemsPage = () => {
     <div>
       <AppTopBar text="Voltar" handleButtonClick={handleButtonClick} />
       <form onSubmit={handleSubmit}>
+        {localStorage.getItem('isBuying') === 'true' && (
+          <FormControl style={{ minWidth: '300px' }}>
+            <InputLabel id="ingredient-label">Ingredient</InputLabel>
+            <Select labelId="ingredient-label" value={ingredientId} onChange={handleIngredientChange}>
+              {ingredients.map((ingredient) => (
+                <MenuItem key={ingredient.id} value={ingredient.id}>
+                  {ingredient.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
         <ItemForm item={item} handleItemChange={handleItemChange} />
         <Button type="submit" variant="contained" color="primary">
           Salvar

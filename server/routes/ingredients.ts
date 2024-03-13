@@ -14,9 +14,9 @@ function generateItemId() {
   return `${part1}-${part2}-${part3}`;
 }
 
-function processItems(req: any) {
+function processItems(req: Request) {
   if (req.body.items) {
-    req.body.items = req.body.items.map((item: any) => {
+    req.body.items = req.body.items.map((item: Item) => {
       if (!item.id) item.id = generateItemId();
       return item;
     });
@@ -32,11 +32,21 @@ router.get('/', (req: Request, res: Response) => {
 
 router.post('/', validateIngredient, (req: Request, res: Response) => {
   const data = readData();
-  req.body.id = Math.floor(Math.random() * 1000000);
   processItems(req);
-  data.ingredients.push(req.body);
+  const { name, category, items } = req.body;
+  const newIngredient: Ingredient = {
+    id: Math.floor(Math.random() * 1000000),
+    name,
+    category,
+    items: items.map((item: Item) => ({
+      id: item.id || generateItemId(),
+      name: item.name,
+      quantity: item.quantity
+    }))
+  };
+  data.ingredients.push(newIngredient);
   writeData(data);
-  res.json(req.body);
+  res.json(newIngredient);
 });
 
 router.put('/:id', validateIngredient, (req: Request, res: Response) => {
@@ -47,9 +57,21 @@ router.put('/:id', validateIngredient, (req: Request, res: Response) => {
     res.status(404).json({ error: 'Ingredient not found' });
   }
   processItems(req);
-  data.ingredients[index] = req.body;
+
+  const { name, category, items } = req.body;
+  const updatedIngredient: Ingredient = {
+    id: Number(req.params.id),
+    name,
+    category,
+    items: items.map((item: Item) => ({
+      id: item.id || generateItemId(),
+      name: item.name,
+      quantity: item.quantity
+    }))
+  };
+  data.ingredients[index] = updatedIngredient;
   writeData(data);
-  res.json(req.body);
+  res.json(updatedIngredient);
 });
 
 router.delete('/:id', (req: Request, res: Response) => {
@@ -89,9 +111,13 @@ router.post('/:id/items', validateItem, (req: Request, res: Response) => {
     ingredient!.items = [];
   }
 
-  const item = {
+  const { name, unit, quantity, expiration } = req.body;
+  const item: Item = {
     id: generateItemId(),
-    ...req.body
+    name,
+    unit,
+    quantity,
+    expiration
   };
 
   ingredient!.items.push(item);
@@ -133,13 +159,19 @@ router.put('/:id/items/:itemId', validateItem, (req: Request, res: Response) => 
     res.status(404).json({ error: 'Item not found' });
   }
 
-  ingredient!.items[index] = {
+  const { name, unit, quantity, expiration } = req.body;
+  const updatedItem: Item = {
     id: req.params.itemId,
-    ...req.body
+    name,
+    unit,
+    quantity,
+    expiration
   };
 
+  ingredient!.items[index] = updatedItem;
+
   writeData(data);
-  res.json(ingredient!.items[index]);
+  res.json(updatedItem);
 });
 
 router.get('/:id/items/:itemId', (req: Request, res: Response) => {

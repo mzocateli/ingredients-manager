@@ -35,6 +35,12 @@ const IngredientsPage = () => {
     navigate('/ingredients/use');
   };
 
+  const handleBuyClick = () => {
+    console.log('Redirecting to /items/register');
+    localStorage.setItem('isBuying', 'true');
+    navigate('/items/register');
+  };
+
   return (
     <div>
       <AppTopBar text="Cadastrar Ingrediente" handleButtonClick={handleButtonClick} />
@@ -52,7 +58,12 @@ const IngredientsPage = () => {
         </Fab>
         {isFabClicked && (
           <div>
-            <Fab color="secondary" aria-label="edit" sx={{ position: 'absolute', bottom: 75, right: 90 }}>
+            <Fab
+              color="secondary"
+              aria-label="edit"
+              sx={{ position: 'absolute', bottom: 75, right: 90 }}
+              onClick={handleBuyClick}
+            >
               <EditIcon />
             </Fab>
             <Fab
