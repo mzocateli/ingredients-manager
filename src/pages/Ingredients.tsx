@@ -41,11 +41,42 @@ const IngredientsPage = () => {
     navigate('/items/register');
   };
 
+  const handleDeleteIngredient = (id: number) => {
+    fetch(`http://localhost:3001/api/ingredients/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        setIngredients(ingredients.filter((ingredient) => ingredient.id !== id));
+      })
+      .catch((error) => console.error('Error:', error));
+  };
+
+  const handleDeleteItem = (ingredientId: number, itemId: string) => {
+    fetch(`http://localhost:3001/api/ingredients/${ingredientId}/items/${itemId}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        setIngredients(
+          ingredients.map((ingredient) =>
+            ingredient.id === ingredientId
+              ? { ...ingredient, items: ingredient.items.filter((item) => item.id !== itemId) }
+              : ingredient
+          )
+        );
+      })
+      .catch((error) => console.error('Error:', error));
+  };
+
   return (
     <div>
       <AppTopBar text="Cadastrar Ingrediente" handleButtonClick={handleButtonClick} />
       {ingredients.map((ingredient) => (
-        <IngredientAccordion key={ingredient.id} ingredient={ingredient} />
+        <IngredientAccordion
+          key={ingredient.id}
+          ingredient={ingredient}
+          onDeleteIngredient={handleDeleteIngredient}
+          onDeleteItem={handleDeleteItem}
+        />
       ))}
       <div>
         <Fab
