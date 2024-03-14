@@ -107,19 +107,19 @@ const IngredientForm = () => {
       <form onSubmit={handleSubmit}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} required />
+            <TextField label="Nome" value={name} onChange={(e) => setName(e.target.value)} required />
           </Grid>
           <Grid item xs={12}>
-            <TextField label="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />
+            <TextField label="Categoria" value={category} onChange={(e) => setCategory(e.target.value)} required />
           </Grid>
           {showItemForm && (
             <Grid item xs={12} container component="div">
               <ItemForm item={item} handleItemChange={handleItemChange} />
               <Button variant="contained" color="primary" onClick={handleConfirmItem}>
-                Confirm
+                Confirmar
               </Button>
               <Button variant="contained" color="secondary" onClick={handleCancelItem}>
-                Cancel
+                Cancelar
               </Button>
             </Grid>
           )}
@@ -127,7 +127,7 @@ const IngredientForm = () => {
             <>
               <Grid item xs={12}>
                 <Button variant="contained" color="primary" onClick={() => setShowItemForm(true)}>
-                  Add Item
+                  Adicionar Item
                 </Button>
               </Grid>
             </>
@@ -138,7 +138,7 @@ const IngredientForm = () => {
                 <ListItem key={index}>
                   <ListItemText
                     primary={item.name}
-                    secondary={`Quantity: ${item.quantity} ${item.unit}, Expiration: ${item.expiration}`}
+                    secondary={`Quantidade: ${item.quantity} ${item.unit}, Validade: ${item.expiration}`}
                   />
                   <IconButton onClick={() => handleEditItem(index)}>
                     <EditIcon />
@@ -152,7 +152,7 @@ const IngredientForm = () => {
           </Grid>
           <Grid item xs={12}>
             <Button variant="contained" color="primary" type="submit">
-              Submit
+              Enviar
             </Button>
           </Grid>
         </Grid>

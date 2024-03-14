@@ -41,7 +41,6 @@ const IngredientUseForm = () => {
 
   const handleSubmit = () => {
     console.log(quantities);
-    // Fetch PUT /api/ingredients/items/use
     fetch('http://localhost:3001/api/ingredients/items/use', {
       method: 'PUT',
       headers: {
@@ -95,15 +94,15 @@ const IngredientUseForm = () => {
       )}
       {!isConfirmed ? (
         <Button variant="contained" color="primary" onClick={handleConfirm}>
-          Confirm
+          Confirmar
         </Button>
       ) : (
         <>
           <Button variant="contained" color="secondary" onClick={handleCancel}>
-            Cancel
+            Cancelar
           </Button>
           <Button variant="contained" color="primary" onClick={handleSubmit}>
-            Submit
+            Enviar
           </Button>
         </>
       )}

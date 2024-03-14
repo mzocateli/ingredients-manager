@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import IngredientAccordion from '../components/IngredientAccordion';
 import { Ingredient } from '../types';
-import AddIcon from '@mui/icons-material/Add';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { Fab } from '@mui/material';
 import AppTopBar from '../components/TopBar';
 import { useNavigate } from 'react-router-dom';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import StoreIcon from '@mui/icons-material/Store';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 import AppBottomNavigation from '../components/AppBottomNavigation';
 
 const IngredientsPage = () => {
@@ -85,7 +85,7 @@ const IngredientsPage = () => {
           sx={{ position: 'absolute', bottom: 75, right: 20 }}
           onClick={handleFabClick}
         >
-          <AddIcon />
+          <MoreHorizIcon />
         </Fab>
         {isFabClicked && (
           <div>
@@ -95,7 +95,7 @@ const IngredientsPage = () => {
               sx={{ position: 'absolute', bottom: 75, right: 90 }}
               onClick={handleBuyClick}
             >
-              <EditIcon />
+              <StoreIcon />
             </Fab>
             <Fab
               color="secondary"
@@ -103,7 +103,7 @@ const IngredientsPage = () => {
               sx={{ position: 'absolute', bottom: 140, right: 20 }}
               onClick={handleUseClick}
             >
-              <DeleteIcon />
+              <RestaurantIcon />
             </Fab>
           </div>
         )}

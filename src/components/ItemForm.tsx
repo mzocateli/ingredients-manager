@@ -11,11 +11,11 @@ const ItemForm: React.FC<ItemFormProps> = ({ item, handleItemChange }) => {
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <TextField label="Name" value={item.name} onChange={(e) => handleItemChange('name', e.target.value)} required />
+        <TextField label="Nome" value={item.name} onChange={(e) => handleItemChange('name', e.target.value)} required />
       </Grid>
       <Grid item xs={12}>
         <TextField
-          label="Quantity"
+          label="Quantidade"
           type="number"
           value={item.quantity}
           onChange={(e) => handleItemChange('quantity', e.target.value)}
@@ -23,7 +23,7 @@ const ItemForm: React.FC<ItemFormProps> = ({ item, handleItemChange }) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Select label="Unit" value={item.unit} onChange={(e) => handleItemChange('unit', e.target.value)} required>
+        <Select label="Unidade" value={item.unit} onChange={(e) => handleItemChange('unit', e.target.value)} required>
           <MenuItem value="g">g</MenuItem>
           <MenuItem value="kg">kg</MenuItem>
           <MenuItem value="ml">ml</MenuItem>
@@ -33,7 +33,7 @@ const ItemForm: React.FC<ItemFormProps> = ({ item, handleItemChange }) => {
       </Grid>
       <Grid item xs={12}>
         <TextField
-          label="Expiration"
+          label="Validade"
           type="date"
           value={item.expiration}
           onChange={(e) => handleItemChange('expiration', e.target.value)}

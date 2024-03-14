@@ -99,9 +99,9 @@ const IngredientAccordion = ({
   return (
     <>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{`Delete ${deleteType}`}</DialogTitle>
+        <DialogTitle>{`Deletar ${deleteType}`}</DialogTitle>
         <DialogContent>
-          <DialogContentText>{`Are you sure you want to delete this ${deleteType}?`}</DialogContentText>
+          <DialogContentText>{`Você tem certeza que deseja deletar ${deleteType}?`}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
