@@ -15,6 +15,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Box,
 } from '@mui/material';
 import React from 'react';
 import { Ingredient, Item } from '../types';
@@ -118,13 +119,24 @@ const IngredientAccordion = ({
         <AccordionDetails>
           <List>
             {ingredient.items.map((item) => (
-              <ListItem key={item.id}>
-                {item.name} - {item.quantity}
-                {item.unit}
-                <ActionButtons
-                  onEdit={() => handleEditItem(item, ingredient.id)}
-                  onDelete={() => handleDeleteItem(item)}
-                />
+              <ListItem key={item.id} style={{ marginBottom: '10px', border: '1px solid #ddd' }}>
+                <Box display="flex" flexDirection="column" width="100%">
+                  <Box display="flex" justifyContent="space-between">
+                    <Box>
+                      <Typography>{item.name}</Typography>
+                      <Typography>
+                        {item.quantity} {item.unit}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography>{item.expiration}</Typography>
+                      <ActionButtons
+                        onEdit={() => handleEditItem(item, ingredient.id)}
+                        onDelete={() => handleDeleteItem(item)}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
               </ListItem>
             ))}
           </List>
