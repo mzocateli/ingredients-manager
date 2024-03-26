@@ -5,11 +5,16 @@
   "main": "server/index.ts",
   "scripts": {
     "client": "vite",
-    "server": "nodemon server/index.ts --exec ts-node",
+    "server": "nodemon server/index.ts --exec \"node --inspect=0.0.0.0:9229 --require ts-node/register\"",
     "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data.json"
+    ]
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -17,6 +22,7 @@
     "@mui/icons-material": "^5.15.12",
     "@mui/material": "^5.15.12",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.17.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

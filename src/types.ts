@@ -41,5 +41,13 @@ export interface Item {
 export interface Recipe {
   id?: string;
   name: string;
+  url: string;
   saved_on: string;
 }
+
+export interface ApiRecipe {
+  id: string;
+  name?: string;
+  url?: string;
+}
+

@@ -5,6 +5,7 @@ import IngredientsPage from './pages/Ingredients';
 import IngredientForm from './components/IngredientForm';
 import ItemsPage from './pages/Item';
 import UsePage from './pages/Use';
+import RecipesPage from './pages/Recipes';
 
 const DefaultRouteRedirect = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/ingredients/register" element={<IngredientForm />} />
           <Route path="/ingredients/use" element={<UsePage />} />
           <Route path="/items/register" element={<ItemsPage />} />
+          <Route path="/recipes" element={<RecipesPage />} />
         </Routes>
       </Router>
     </Box>

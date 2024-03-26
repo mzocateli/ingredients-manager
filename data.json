@@ -42,6 +42,18 @@
         }
       ],
       "id": 4068
+    },
+    {
+      "id": 419856,
+      "name": "Truta",
+      "category": "5",
+      "items": [
+        {
+          "id": "84f-x9x-6deo",
+          "name": "Truta Carrefour",
+          "quantity": 1000
+        }
+      ]
     }
   ],
   "alerts": [
@@ -66,9 +78,16 @@
   ],
   "recipes": [
     {
-      "id": "xpz-123-abc",
-      "name": "Pão",
-      "saved_on": "2024-02-24"
+      "id": "3fc3dafa172b2412da525bbd1b9645f0",
+      "name": "Buttery trout with capers",
+      "url": "https://www.bbcgoodfood.com/recipes/buttery-trout-capers",
+      "saved_on": "2024-03-26T01:00:54.565Z"
+    },
+    {
+      "id": "419049194b2ad9b494e1d770e60d8d16",
+      "name": "Grilled Trout with Capers and Orange",
+      "url": "http://www.thedailymeal.com/grilled-trout-capers-and-orange-recipe",
+      "saved_on": "2024-03-26T01:01:12.890Z"
     }
   ]
 }

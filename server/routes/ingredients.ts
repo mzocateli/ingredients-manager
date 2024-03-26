@@ -25,13 +25,13 @@ function processItems(req: Request) {
   }
 }
 
-router.get('/', (req: Request, res: Response) => {
-  const data = readData();
+router.get('/', async (req: Request, res: Response) => {
+  const data = await readData();
   res.json(data.ingredients);
 });
 
-router.post('/', validateIngredient, (req: Request, res: Response) => {
-  const data = readData();
+router.post('/', validateIngredient, async (req: Request, res: Response) => {
+  const data = await readData();
   processItems(req);
   const { name, category, items } = req.body;
   const newIngredient: Ingredient = {
@@ -49,8 +49,8 @@ router.post('/', validateIngredient, (req: Request, res: Response) => {
   res.json(newIngredient);
 });
 
-router.put('/:id', validateIngredient, (req: Request, res: Response) => {
-  const data = readData();
+router.put('/:id', validateIngredient, async (req: Request, res: Response) => {
+  const data = await readData();
   const index = data.ingredients.findIndex(ingredient => ingredient.id === Number(req.params.id));
 
   if (index === -1) {
@@ -74,8 +74,8 @@ router.put('/:id', validateIngredient, (req: Request, res: Response) => {
   res.json(updatedIngredient);
 });
 
-router.delete('/:id', (req: Request, res: Response) => {
-  const data = readData();
+router.delete('/:id', async (req: Request, res: Response) => {
+  const data = await readData();
   const index = data.ingredients.findIndex(ingredient => ingredient.id === Number(req.params.id));
 
   if (index === -1) {
@@ -87,20 +87,20 @@ router.delete('/:id', (req: Request, res: Response) => {
   res.json({ id: Number(req.params.id) });
 });
 
-router.get('/:id', (req: Request, res: Response) => {
-  const data = readData();
+router.get('/:id', async (req: Request, res: Response) => {
+  const data = await readData();
   const ingredient = data.ingredients.find(ingredient => ingredient.id === Number(req.params.id));
   res.json(ingredient);
 });
 
-router.get('/:id/items', (req: Request, res: Response) => {
-  const data = readData();
+router.get('/:id/items', async (req: Request, res: Response) => {
+  const data = await readData();
   const ingredient = data.ingredients.find(ingredient => ingredient.id === Number(req.params.id));
   res.json(ingredient?.items || []);
 });
 
-router.post('/:id/items', validateItem, (req: Request, res: Response) => {
-  const data = readData();
+router.post('/:id/items', validateItem, async (req: Request, res: Response) => {
+  const data = await readData();
   const ingredient = data.ingredients.find(ingredient => ingredient.id === Number(req.params.id));
 
   if (!ingredient) {
@@ -125,8 +125,8 @@ router.post('/:id/items', validateItem, (req: Request, res: Response) => {
   res.json(item);
 });
 
-router.put('/items/use', (req: Request, res: Response) => {
-  const data = readData();
+router.put('/items/use', async (req: Request, res: Response) => {
+  const data = await readData();
   const items: Item[] = req.body.items;
   const updatedItems: Ingredient[] = data.ingredients.map(ingredient => {
     const updatedIngredientItems = ingredient.items.map(item => {
@@ -145,8 +145,8 @@ router.put('/items/use', (req: Request, res: Response) => {
   res.json(updatedItems);
 });
 
-router.put('/:id/items/:itemId', validateItem, (req: Request, res: Response) => {
-  const data = readData();
+router.put('/:id/items/:itemId', validateItem, async (req: Request, res: Response) => {
+  const data = await readData();
   const ingredient = data.ingredients.find(ingredient => ingredient.id === Number(req.params.id));
 
   if (!ingredient) {
@@ -174,15 +174,15 @@ router.put('/:id/items/:itemId', validateItem, (req: Request, res: Response) => 
   res.json(updatedItem);
 });
 
-router.get('/:id/items/:itemId', (req: Request, res: Response) => {
-  const data = readData();
+router.get('/:id/items/:itemId', async (req: Request, res: Response) => {
+  const data = await readData();
   const ingredient = data.ingredients.find(ingredient => ingredient.id === Number(req.params.id));
   const item = ingredient?.items.find(item => item.id === req.params.itemId);
   res.json(item);
 });
 
-router.delete('/:id/items/:itemId', (req: Request, res: Response) => {
-  const data = readData();
+router.delete('/:id/items/:itemId', async (req: Request, res: Response) => {
+  const data = await readData();
   const ingredient = data.ingredients.find(ingredient => ingredient.id === Number(req.params.id));
 
   if (!ingredient) {

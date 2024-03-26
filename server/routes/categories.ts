@@ -3,20 +3,20 @@ import { readData, writeData } from '../data';
 
 const router = express.Router();
 
-router.get('/', (req: Request, res: Response) => {
-  const data = readData();
+router.get('/', async (req: Request, res: Response) => {
+  const data = await readData();
   res.json(data.categories);
 });
 
-router.post('/', (req: Request, res: Response) => {
-  const data = readData();
+router.post('/', async (req: Request, res: Response) => {
+  const data = await readData();
   data.categories.push(req.body);
   writeData(data);
   res.json(req.body);
 });
 
-router.patch('/:id', (req: Request, res: Response) => {
-  const data = readData();
+router.patch('/:id', async (req: Request, res: Response) => {
+  const data = await readData();
   const index = data.categories.findIndex(category => category.id === Number(req.params.id));
 
   if (index === -1) {

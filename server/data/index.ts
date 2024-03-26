@@ -1,10 +1,14 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import { Data } from '../../src/types';
 
-export const readData = (): Data => {
-  return JSON.parse(fs.readFileSync('data.json', 'utf8'));
+let queue: Promise<void> = Promise.resolve();
+
+export const readData = async (): Promise<Data> => {
+  const data = await fs.readFile('data.json', 'utf8');
+  return JSON.parse(data);
 };
 
-export const writeData = (data: Data) => {
-  fs.writeFileSync('data.json', JSON.stringify(data, null, 2));
+export const writeData = (data: Data): void => {
+  const jsonData = JSON.stringify(data, null, 2);
+  queue = queue.then(() => fs.writeFile('data.json', jsonData));
 };
